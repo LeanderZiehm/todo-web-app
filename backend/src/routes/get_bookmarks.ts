@@ -4,7 +4,7 @@ import {
   type FastifyReply,
   type FastifySchema,
 } from "fastify";
-// import get_bookmarks from "../services/database.ts";
+import get_bookmarks from "../services/database.ts";
 
 export default async function (app: FastifyInstance) {
 interface MyParams {
