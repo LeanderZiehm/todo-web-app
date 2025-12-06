@@ -4,7 +4,7 @@ import {
   type FastifyReply,
   type FastifySchema,
 } from "fastify";
-import get_bookmarks from "../services/database.ts";
+// import get_bookmarks from "../services/database.ts";
 
 export default async function (app: FastifyInstance) {
 interface MyParams {
@@ -23,8 +23,9 @@ interface MyParams {
       reply: FastifyReply
     ) => {
       // const { limit } = request.params;
-      const bookmarks = "book book book";//await get_bookmarks();
-      return JSON.stringify(bookmarks);
+      // const bookmarks = "book book book";//await get_bookmarks();
+      // return JSON.stringify(bookmarks);
+      return "book book book 2";
     }
   );
 }
