@@ -23,7 +23,7 @@ interface MyParams {
       reply: FastifyReply
     ) => {
       // const { limit } = request.params;
-      const bookmarks = await get_bookmarks();
+      const bookmarks = "book book book";//await get_bookmarks();
       return JSON.stringify(bookmarks);
     }
   );
