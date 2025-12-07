@@ -5,6 +5,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import path from "path";
 import { fileURLToPath } from "url";
 import autoload from "@fastify/autoload";
+import cors from '@fastify/cors'
 
 const version = "0.0.3";
 
@@ -17,6 +18,7 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 dotenv.config();
+
 
 // const envToLogger:any = {
 //   development: {
@@ -34,6 +36,10 @@ dotenv.config();
 
 // const app = fastify.fastify({ logger: envToLogger["development"] ?? true  });
 const app = fastify.fastify({ logger: true  });
+
+await app.register(cors, {
+   origin: true
+})
 
 
 // Global error handler
