@@ -22,7 +22,7 @@ const schema: FastifySchema = {
   }
 };
   app.get(
-  "/texts/",
+  "/texts",
   { schema },
   async (request: FastifyRequest, reply: FastifyReply) => {
     const { per_page, page } = request.query as { per_page?: number; page?: number };
