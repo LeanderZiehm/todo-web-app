@@ -4,7 +4,8 @@
     "outDir": "./dist",
     "module": "NodeNext",
 
-    "strict": true,
+    "strict": false,
+      //  "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 

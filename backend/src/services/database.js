@@ -53,10 +53,11 @@ class Texts {
   }
 }
 
-export async function get_texts(descending=true,limit=5) {
+export async function get_texts(descending=true,limit=5,page=0) {
   client = await get_client();
   if (client !== null) {
     try {
+      console.log("page:",page)
       const sql = Texts.get_select_texts_sql(descending,limit);
       console.log(sql);
       const result = await client.query(sql);
