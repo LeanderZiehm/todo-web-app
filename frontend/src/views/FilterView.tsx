@@ -14,17 +14,34 @@ export default function FilterView() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Extract types dynamically
-  const types = Array.from(
-    new Set(
-      all
-        .map((item) => {
-          const match = item.text.match(/^(\w+)(\(.+\))?:/);
-          return match ? match[1] : null;
-        })
-        .filter(Boolean)
-    )
-  );
+  // // Extract types dynamically
+  // const types = Array.from(
+  //   new Set(
+  //     all
+  //       .map((item) => {
+  //         const match = item.text.match(/^(\w+)(\(.+\))?:/);
+  //         return match ? match[1] : null;
+  //       })
+  //       .filter(Boolean)
+  //   )
+  // );
+
+
+// Build counts per type
+const typeCounts = all.reduce((acc, item) => {
+  const match = item.text.match(/^(\w+)(\(.+\))?:/);
+  if (!match) return acc;
+
+  const type = match[1];
+  acc[type] = (acc[type] || 0) + 1;
+  return acc;
+}, {});
+
+// Sort descending by count and format as "type (count)"
+const types = Object.entries(typeCounts)
+  .sort((a, b) => b[1] - a[1])
+  .map(([type, count]) => `${type} (${count})`);
+
 
   // Filter whenever typeFilter or search changes
   useEffect(() => {
