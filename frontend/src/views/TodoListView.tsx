@@ -20,12 +20,13 @@ export default function TodoList() {
         setTexts(result);
       })
       .catch((err) => setError(err.message))
-      .finally(() => setLoading(false)); // maybe TODO make a vscode extension that looks for errors and suggests fixes for them automatically and asks for accept or not
+      .finally(() => setLoading(false)); 
   }
 
   async function handleSubmit(e) {
     e.preventDefault(); // prevent page reload
-    if (typeof inputValue === "string") {
+    if (typeof inputValue === "string" && inputValue.trim().length > 0) {
+
       setInputValue(""); 
       await insertText(inputValue);
       fetchAndLoadTexts();
