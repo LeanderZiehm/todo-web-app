@@ -6,15 +6,16 @@ import path from "path";
 import { fileURLToPath } from "url";
 import autoload from "@fastify/autoload";
 import cors from '@fastify/cors'
+import fastifyStatic from "@fastify/static";
 
-const version = "0.0.3";
+const version = "0.0.4";
 
 process.on("uncaughtException", (err: Error) => {
-  console.error("Uncaught Exception:", err);
+  app.log.error(`Uncaught Exception: ${err}` );
 });
 
 process.on("unhandledRejection", (reason, promise) => {
-  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+   app.log.error(`Unhandled Rejection at: ${promise}  reason: ${reason}` );
 });
 
 dotenv.config();
@@ -45,7 +46,7 @@ await app.register(cors, {
 // Global error handler
 app.setErrorHandler((error, request, reply) => {
   // Log the error
-  console.error("Global error handler:", error);
+  app.log.error(`Global error handler: ${error}` );
 
   // Send a generic response to the client
   reply.status(500).send({ error: "Internal Server Error" });
@@ -77,17 +78,27 @@ app.register(autoload, {
   forceESM: true,
 });
 
-app.get("/", async () => {
-  // return { message: ` hello world :)  version: ${version} ` };
-  return ` hello world :)  version: ${version} `;
+app.get("/", async (request, reply) => {
+  reply.redirect("/docs",302);
 });
-app.get("/favicon.ico", async () => {
-  return ``;
-});
+
+// app.get("/favicon.ico", async () => {
+//   return ``; // host static file image.png from public 
+// });
+
+export default async function (app) {
+  app.register(fastifyStatic, {
+    root: path.join(__dirname, "../public"),
+    prefix: "/", // serves files at /
+  });
+}
+
 app
   .listen({ port: 3000, host: "127.0.0.1" })
   .then(() => 1)
   .catch((err) => {
-    console.error(err);
+    // console.error(err);
+      app.log.error(`Error: ${err}` );
+
     process.exit(1);
   });
