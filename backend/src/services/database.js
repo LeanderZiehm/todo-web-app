@@ -1,5 +1,5 @@
 import pg from "pg";
-import {Texts} from "../routes/texts.route.ts"
+import {Texts} from "../routes/texts.route.js"
 
 let client = null;
 

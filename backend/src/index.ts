@@ -10,14 +10,6 @@ import cors from '@fastify/cors'
 
 const version = "0.0.4";
 
-process.on("uncaughtException", (err: Error) => {
-  app.log.error(`Uncaught Exception: ${err}` );
-});
-
-process.on("unhandledRejection", (reason, promise) => {
-   app.log.error(`Unhandled Rejection at: ${promise}  reason: ${reason}` );
-});
-
 dotenv.config();
 
 
@@ -43,6 +35,13 @@ await app.register(cors, {
 })
 
 
+process.on("uncaughtException", (err: Error) => {
+  app.log.error(`Uncaught Exception: ${err}` );
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+   app.log.error(`Unhandled Rejection at: ${promise}  reason: ${reason}` );
+});
 // Global error handler
 app.setErrorHandler((error, request, reply) => {
   // Log the error
