@@ -6,7 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import autoload from "@fastify/autoload";
 import cors from '@fastify/cors'
-import fastifyStatic from "@fastify/static";
+// import fastifyStatic from "@fastify/static";
 
 const version = "0.0.4";
 
@@ -86,15 +86,15 @@ app.get("/", async (request, reply) => {
 //   return ``; // host static file image.png from public 
 // });
 
-export default async function (app) {
-  app.register(fastifyStatic, {
-    root: path.join(__dirname, "../public"),
-    prefix: "/", // serves files at /
-  });
-}
+// export default async function (app) {
+//   app.register(fastifyStatic, {
+//     root: path.join(__dirname, "../public"),
+//     prefix: "/", // serves files at /
+//   });
+// }
 
 app
-  .listen({ port: 3000, host: "127.0.0.1" })
+  .listen({ port: 4000, host: "127.0.0.1" })
   .then(() => 1)
   .catch((err) => {
     // console.error(err);
