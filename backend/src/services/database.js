@@ -1,5 +1,5 @@
 import pg from "pg";
-import {Texts} from "../routes/texts.route.js"
+import {Texts} from "../routes/texts.route.ts"
 
 let client = null;
 
@@ -8,8 +8,8 @@ export default async function getDatabaseClient(){
     client = new pg.Client({
       host: process.env.POSTGRES_HOST,
       database: process.env.POSTGRES_DATABASE,
-      user: process.env.POSTGRES_ADMIN_USER, //process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_ADMIN_PASSWORD, //process.env.POSTGRES_PASSWORD
+      user: process.env.POSTGRES_USER, //process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD, //process.env.POSTGRES_PASSWORD
     });
     await client.connect();
     try {
